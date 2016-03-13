@@ -47,6 +47,8 @@ private slots:
     void on_pbAddDct_clicked();
     void on_pbAddWord_clicked();
 
+    void on_lvDct_clicked(const QModelIndex &index);
+
 private:
     QAbstractItemModel* modelLanguages_ = nullptr;
     std::shared_ptr<LanguagesWindow> langWin_;

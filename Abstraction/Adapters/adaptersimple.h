@@ -15,6 +15,7 @@ class AdapterSimple :
 //______________________________________________________________Interface__
 public:
     spNode getNodeAt(int row);
+    QVariant data(int row) const;
 
     QVariant data(const QModelIndex &index, int role) const override final;
     QModelIndex index(int row, int column,

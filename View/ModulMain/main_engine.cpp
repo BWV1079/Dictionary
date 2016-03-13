@@ -20,12 +20,15 @@ void MainEngine::setCurLL(const QVariant& name)
     view_->setNameCurLL(name);
     curLL_ = fAc_->getCurLL(account());
     adapterDct_->setNode(curLL_);
-
+    setCurDct(adapterDct_->data(0));
 }
 
 void MainEngine::setCurDct(const QVariant& name)
 {
-
+    auto d = fLL_->getDct(curLL_, name);
+    adapterWords_->setNameTranslationLang(fAc_->getNameCurLL(account()));
+    adapterWords_->setNode(d);
+    curDct_ = d;
 }
 
 void MainEngine::eventSelectLL(const QVariant& name)
@@ -38,7 +41,7 @@ void MainEngine::eventSelectLL(const QVariant& name)
 void MainEngine::eventSelectDct(const QVariant &name)
 {
     logic(isInitialized_);
-
+    setCurDct(name);
 }
 
 void MainEngine::eventAddLL(const QVariant& name)
@@ -54,13 +57,26 @@ void MainEngine::eventCreateDct(const QVariant& name)
     logic(isInitialized_);
     if(name.toString().isEmpty()) return;
     auto n = fLL_->createDct(curLL(), fAc_->getLK(account()), name);
-    if(!n) view_->messageDctAlreadyExist();
+    if(!n){ view_->messageDctAlreadyExist(); return; }
+    setCurDct(name);
+}
+
+void MainEngine::eventAddWord()
+{
+    fDct_->beg();
+//    for(int i = 0; i < 1000; ++i){
+//        fDct_->createWord(curDct_, QString::number(i), "speis");
+//        qDebug() << i;
+//    }
+    fDct_->createWord(curDct_, "fire", "fair");
+    fDct_->end();
 }
 
 MainEngine::MainEngine(upMainViewInterface&& view,
-                       spFunctionalAccounts fAcs,
-                       spFunctionalAccount fAc,
-                       spFunctionalLL fLL,
+                       const spFunctionalAccounts& fAcs,
+                       const spFunctionalAccount& fAc,
+                       const spFunctionalLL& fLL,
+                       const spFunctionalDct& fDct,
                        upAdapterSimpleRef&& adapterLL,
                        upAdapterHideRows&& adapterLanguages,
                        upAdapterSimple&& adapterDct,
@@ -68,6 +84,7 @@ MainEngine::MainEngine(upMainViewInterface&& view,
     fAcs_(fAcs),
     fAc_(fAc),
     fLL_(fLL),
+    fDct_(fDct),
     adapterLL_(std::move(adapterLL)),
     adapterLanguages_(std::move(adapterLanguages)),
     adapterDct_(std::move(adapterDct)),
@@ -76,6 +93,7 @@ MainEngine::MainEngine(upMainViewInterface&& view,
     argument(fAcs_);
     argument(fAc_);
     argument(fLL_);
+    argument(fDct_);
     argument(adapterLL_);
     argument(adapterLanguages_);
     argument(adapterDct_);

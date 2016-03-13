@@ -11,6 +11,13 @@ spNode AdapterSimple::getNodeAt(int row)
     return list_.at(row);
 }
 
+QVariant AdapterSimple::data(int row) const
+{
+    if(row < 0 || row >= list_.size())
+        return QVariant();
+    return list_.at(row)->data(key_);
+}
+
 QVariant AdapterSimple::data(const QModelIndex &index, int role) const
 {
     if(!index.isValid() ||

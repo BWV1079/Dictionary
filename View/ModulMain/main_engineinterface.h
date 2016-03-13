@@ -16,6 +16,8 @@ public:
     virtual void eventAddLL(const QVariant& name) = 0;
     virtual void eventCreateDct(const QVariant& name) = 0;
     virtual void eventSelectLL(const QVariant& nameLL) = 0;
+    virtual void eventSelectDct(const QVariant& nameDct) = 0;
+    virtual void eventAddWord() = 0;
 
 //_______________________________________________Initialization__
 public:

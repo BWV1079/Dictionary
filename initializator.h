@@ -61,6 +61,7 @@ private:
     spFunctionalAccount fAc_;
     spFunctionalAccounts fAcs_;
     spFunctionalLL fLL_;
+    spFunctionalDct fDct_;
 
     IDTypeNode idtnRoot_;
     IDTypeNode idtnAccounts_;

@@ -27,15 +27,19 @@ spNode FunctionalDct::createWord(const spNode& dct,
                                  const QString& word,
                                  const QString& transcription)
 {
+    argument(dct);
     //Находим язык, которому принадлежит словарь
     auto lang = getRefLang(dct);
     //Создаем слово в узле-ссылке на язык
     auto id = a.base_->createUnique(lang->getID(), a.idtnWord_, a.idtlWordLang_, a.keyWord_, word);
     spNode w;
     if(!id.isValid()){
-    //Если id не валидный, значит слово уже есть в языке, ищем это слово
+        //Если id не валидный, значит слово уже есть в языке, ищем это слово
         w = a.base_->findChild(lang->getID(), a.keyWord_, word, a.idtnWord_);
         logic(w);
+        //Связываем со словарем, если такого слова в данном словаре нет
+        if(!a.base_->findChild(dct->getID(), a.keyWord_, word, a.idtnWord_))
+            a.base_->connectNodes(dct->getID(), w->getID(), a.idtlWordDct_);
     }
     else{
         //Если id валидный получаем сам узел

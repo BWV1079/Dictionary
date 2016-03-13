@@ -31,6 +31,8 @@ public:
     explicit FunctionalDct(FunctionalDctArgs&& args);
 
 public:
+    void beg(){a.base_->beginChange();}
+    void end(){a.base_->endChange();}
     spNode createWord(const spNode& dct,
                       const QString& word,
                       const QString& transcription);

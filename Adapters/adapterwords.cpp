@@ -108,7 +108,7 @@ void AdapterWords::accept()
         auto ps = base_->getChildren(i->getID());
         for(auto j: ps){
             //Получаем список переводов из данной части речи
-            auto translations = base_->getChildren(j->getID());
+            auto translations = base_->getChildren(j->getID(), idtnWord_);
             //Пополняем строку с переводами, проверяя принадлежат ли данные слова
             //интересующему языку
             for(auto t: translations)

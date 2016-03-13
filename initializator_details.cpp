@@ -186,8 +186,22 @@ void Initializator::createFunctional()
     aLL.keyNameDct_        = TypeDct::Name;
     aLL.keyNameLang_       = TypeLanguage::NameEng;
     aLL.keyNameLLForDctLK_ = TypeLLForDctLK::Name;
-
     fLL_ = spFunctionalLL(new FunctionalLL(std::move(aLL)));
+
+    FunctionalDctArgs aDct;
+    aDct.base_ = base_;
+    aDct.idtnWord_ = idtnWord_;
+    aDct.idtnLL_ = idtnRefLL_;
+    aDct.idtnLK_ = idtnRefLK_;
+    aDct.idtnPS_ = idtnPart_OfSpeech_;
+    aDct.idtnRefPS_ = idtnRefPS_;
+    aDct.idtlWordDct_ = idtlStrong_;
+    aDct.idtlWordLang_ = idtlWeak_;
+    aDct.idtlRefPS_ = idtlStrong_;
+    aDct.idtlRef_ = idtlRef_;
+    aDct.keyWord_ = TypeWord::Name;
+    aDct.keyTranscription_ = TypeWord::Transcription;
+    fDct_ = spFunctionalDct(new FunctionalDct(std::move(aDct)));
 }
 
 void Initializator::createModulAccount()
@@ -231,7 +245,7 @@ void Initializator::createModulMain()
 
     upMainViewInterface view(new MainView());
     engineMain_.reset(new MainEngine(std::move(view),
-                                     fAcs_, fAc_, fLL_,
+                                     fAcs_, fAc_, fLL_, fDct_,
                                      std::move(adapterLL),
                                      std::move(adapterLang),
                                      std::move(adapterDct),

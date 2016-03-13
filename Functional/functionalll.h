@@ -32,6 +32,8 @@ public:
     spNode createDct(const spNode& ll,
                      const spNode& lk,
                      const QVariant& nameDct);
+    spNode getDct(const spNode& ll,
+                  const QVariant& nameDct);
 
 private:
     FunctionalLLArgs a_;

@@ -23,6 +23,7 @@ public:
 
     void eventAddLL(const QVariant& name);
     void eventCreateDct(const QVariant& name);
+    void eventAddWord();
 
     void eventSelectLL(const QVariant& name);
     void eventSelectDct(const QVariant& name);
@@ -31,9 +32,10 @@ public:
 //_______________________________________Initialization__
 public:
     explicit MainEngine(upMainViewInterface&& view,
-                        spFunctionalAccounts fAcs,
-                        spFunctionalAccount fAc,
-                        spFunctionalLL fLL,
+                        const spFunctionalAccounts& fAcs,
+                        const spFunctionalAccount& fAc,
+                        const spFunctionalLL& fLL,
+                        const spFunctionalDct& fDct,
                         upAdapterSimpleRef&& adapterLL,
                         upAdapterHideRows&& adapterLanguages,
                         upAdapterSimple&& adapterDct,
@@ -48,6 +50,7 @@ private:
     spFunctionalAccounts fAcs_;
     spFunctionalAccount fAc_;
     spFunctionalLL fLL_;
+    spFunctionalDct fDct_;
     upAdapterSimpleRef adapterLL_;
     upAdapterHideRows adapterLanguages_;
     upAdapterSimple adapterDct_;

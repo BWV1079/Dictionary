@@ -104,5 +104,11 @@ void MainView::on_pbAddDct_clicked()
 void MainView::on_pbAddWord_clicked()
 {
     logic(isInitialized_);
+    engine_->eventAddWord();
+}
 
+void MainView::on_lvDct_clicked(const QModelIndex &index)
+{
+    logic(isInitialized_);
+    engine_->eventSelectDct(ui->lvDct->model()->data(index));
 }

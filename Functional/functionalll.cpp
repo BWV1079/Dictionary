@@ -44,3 +44,9 @@ spNode FunctionalLL::createDct(const spNode& ll,
     a_.base_->connectNodes(lk->getID(), d, a_.idtlDctLK_);
     return a_.base_->getNode(id);
 }
+
+spNode FunctionalLL::FunctionalLL::getDct(const spNode& ll,
+                                          const QVariant& nameDct)
+{
+    return a_.base_->findChild(ll->getID(), a_.keyNameDct_, nameDct, a_.idtnDct_);
+}
